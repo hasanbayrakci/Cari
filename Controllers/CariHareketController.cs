@@ -29,7 +29,9 @@ namespace Cari.Controllers
         // GET: CariHareketController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var result = _db.CariHareket.Find(id);
+            ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+            return View(result);
         }
 
         // GET: CariHareketController/Create
@@ -60,6 +62,7 @@ namespace Cari.Controllers
         // GET: CariHareketController/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Customers = _db.Customer.ToList();
             var result = _db.CariHareket.Find(id);
             return View(result);
         }
@@ -67,10 +70,12 @@ namespace Cari.Controllers
         // POST: CariHareketController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, CariHareket obj)
         {
             try
             {
+                _db.CariHareket.Update(obj);
+                _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -82,7 +87,9 @@ namespace Cari.Controllers
         // GET: CariHareketController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var result = _db.CariHareket.Find(id);
+            ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+            return View(result);
         }
 
         // POST: CariHareketController/Delete/5
@@ -92,6 +99,9 @@ namespace Cari.Controllers
         {
             try
             {
+                var obj = _db.CariHareket.Find(id);
+                _db.CariHareket.Remove(obj);
+                _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

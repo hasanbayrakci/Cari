@@ -15,12 +15,24 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Firma_Id" class="control-label"></label>
-                <input asp-for="Firma_Id" class="form-control" />
+                <select asp-for="Firma_Id" class="form-control">
+                    <option value="">Seçiniz</option>
+                    @foreach (var firma in ViewBag.Customers)
+                    {
+                        <option value="@firma.Id">@firma.Unvan</option>
+                    }
+                </select>
                 <span asp-validation-for="Firma_Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Islem_Turu" class="control-label"></label>
-                <input asp-for="Islem_Turu" class="form-control" />
+                <select asp-for="Islem_Turu" class="form-control">
+                    <option value="">Seçiniz</option>
+                    @foreach (var islemTuru in Model.IslemTuruArray)
+                    {
+                        <option value="@islemTuru.Key">@islemTuru.Value</option>
+                    }
+                </select>
                 <span asp-validation-for="Islem_Turu" class="text-danger"></span>
             </div>
             <div class="form-group">
