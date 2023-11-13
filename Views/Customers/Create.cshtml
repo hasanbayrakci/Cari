@@ -1,41 +1,35 @@
 ﻿@model Cari.Models.Customer
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Ekle";
 }
 
-<h1>Create</h1>
-
-<h4>Customer</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Unvan" class="control-label"></label>
                 <input asp-for="Unvan" class="form-control" />
                 <span asp-validation-for="Unvan" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Telefon" class="control-label"></label>
                 <input asp-for="Telefon" class="form-control" />
                 <span asp-validation-for="Telefon" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Adres" class="control-label"></label>
                 <input asp-for="Adres" class="form-control" />
                 <span asp-validation-for="Adres" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <input type="submit" value="Create" class="btn btn-primary"/>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
 </div>
 
 @section Scripts {
