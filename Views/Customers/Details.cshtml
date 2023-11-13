@@ -1,42 +1,40 @@
 ﻿@model Cari.Models.Customer
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Firma Detayı";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Customer</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Unvan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Unvan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefon)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefon)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Adres)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Adres)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarih)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tarih)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-8">
+        <table class="table table-bordered">
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Unvan)</td>
+                <td>@Html.DisplayFor(model => model.Unvan)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Telefon)</td>
+                <td>@Html.DisplayFor(model => model.Telefon)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Adres)</td>
+                <td>@Html.DisplayFor(model => model.Adres)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Tarih)</td>
+                <td>@Html.DisplayFor(model => model.Tarih)</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-4">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-header">Bakiye</div>
+            <div class="card-body">
+                <h5 class="card-title text-end">0 TL</h5>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
 </div>
