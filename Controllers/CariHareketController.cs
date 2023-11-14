@@ -30,7 +30,10 @@ namespace Cari.Controllers
         public ActionResult Details(int id)
         {
             var result = _db.CariHareket.Find(id);
-            ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+            if(result != null)
+            {
+                ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+            }
             return View(result);
         }
 
@@ -88,7 +91,10 @@ namespace Cari.Controllers
         public ActionResult Delete(int id)
         {
             var result = _db.CariHareket.Find(id);
-            ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+            if(result != null)
+            {
+                ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+            }
             return View(result);
         }
 
@@ -100,8 +106,11 @@ namespace Cari.Controllers
             try
             {
                 var obj = _db.CariHareket.Find(id);
-                _db.CariHareket.Remove(obj);
-                _db.SaveChanges();
+                if(obj != null)
+                {
+                    _db.CariHareket.Remove(obj);
+                    _db.SaveChanges();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

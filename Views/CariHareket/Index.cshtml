@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<Cari.Models.CariHareket>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cari Hareket";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="text-end">
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Create">Yeni Kayıt</a>
+</div>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -20,9 +18,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tutar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kalan_Tutar)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tarih)
@@ -46,15 +41,12 @@
                         @Html.DisplayFor(modelItem => item.Tutar)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Kalan_Tutar)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Tarih)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                        <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                        <a class="btn btn-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }
