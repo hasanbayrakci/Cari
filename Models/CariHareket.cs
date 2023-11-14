@@ -8,7 +8,9 @@ namespace Cari.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Display(Name = "Firma")]
         public int Firma_Id { get; set; }
+        [Display(Name = "İşlem Türü")]
         public int Islem_Turu { get; set; } //1:Giriş, 2:Çıkış
         public decimal Tutar {  get; set; }
         public decimal Kalan_Tutar { get; set; }

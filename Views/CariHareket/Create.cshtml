@@ -1,18 +1,14 @@
 ﻿@model Cari.Models.CariHareket
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Yeni Kayıt";
 }
 
-<h1>Create</h1>
-
-<h4>CariHareket</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Firma_Id" class="control-label"></label>
                 <select asp-for="Firma_Id" class="form-control">
                     <option value="">Seçiniz</option>
@@ -23,7 +19,7 @@
                 </select>
                 <span asp-validation-for="Firma_Id" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Islem_Turu" class="control-label"></label>
                 <select asp-for="Islem_Turu" class="form-control">
                     <option value="">Seçiniz</option>
@@ -34,20 +30,18 @@
                 </select>
                 <span asp-validation-for="Islem_Turu" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="Tutar" class="control-label"></label>
                 <input asp-for="Tutar" class="form-control" />
                 <span asp-validation-for="Tutar" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <input type="submit" value="Kaydet" class="btn btn-primary btn-sm" />
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
 </div>
 
 @section Scripts {
