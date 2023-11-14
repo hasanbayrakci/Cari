@@ -92,8 +92,12 @@ namespace Cari.Controllers
             try
             {
                 var obj = _db.Customer.Find(id);
-                _db.Customer.Remove(obj);
-                _db.SaveChanges();
+                if(obj != null)
+                {
+                    _db.Customer.Remove(obj);
+                    _db.SaveChanges();
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             catch

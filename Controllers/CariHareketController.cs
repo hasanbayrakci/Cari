@@ -32,7 +32,7 @@ namespace Cari.Controllers
             var result = _db.CariHareket.Find(id);
             if(result != null)
             {
-                ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+                ViewBag.Customer = _db.Customer.Find(result.CustomerId);
             }
             return View(result);
         }
@@ -93,7 +93,7 @@ namespace Cari.Controllers
             var result = _db.CariHareket.Find(id);
             if(result != null)
             {
-                ViewBag.Customer = _db.Customer.Find(result.Firma_Id);
+                ViewBag.Customer = _db.Customer.Find(result.CustomerId);
             }
             return View(result);
         }

@@ -11,10 +11,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Firma_Id)
+                @Html.DisplayNameFor(model => model.CustomerId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Islem_Turu)
+                @Html.DisplayNameFor(model => model.IslemTuru)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tutar)
@@ -32,10 +32,10 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Firma_Id)
+                        @Html.DisplayFor(modelItem => item.CustomerId)
                     </td>
                     <td>
-                        @ViewBag.IslemTuru[item.Islem_Turu]
+                        @ViewBag.IslemTuru[item.IslemTuru]
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Tutar)
