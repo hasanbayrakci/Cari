@@ -8,9 +8,9 @@ namespace Cari.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Unvan { get; set; }
-        public string Telefon { get; set; }
-        public string Adres { get; set; }
+        public required string Unvan { get; set; }
+        public string? Telefon { get; set; }
+        public string? Adres { get; set; }
         public DateTime Tarih { get; set; } = DateTime.Now;
     }
 }

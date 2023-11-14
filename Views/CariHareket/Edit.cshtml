@@ -10,26 +10,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="mb-3">
-                <label asp-for="Firma_Id" class="control-label"></label>
-                <select asp-for="Firma_Id" class="form-control">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control">
                     <option value="">Seçiniz</option>
                     @foreach (var firma in ViewBag.Customers)
                     {
                         <option value="@firma.Id">@firma.Unvan</option>
                     }
                 </select>
-                <span asp-validation-for="Firma_Id" class="text-danger"></span>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Islem_Turu" class="control-label"></label>
-                <select asp-for="Islem_Turu" class="form-control">
+                <label asp-for="IslemTuru" class="control-label"></label>
+                <select asp-for="IslemTuru" class="form-control">
                     <option value="">Seçiniz</option>
                     @foreach (var islemTuru in Model.IslemTuruArray)
                     {
                         <option value="@islemTuru.Key">@islemTuru.Value</option>
                     }
                 </select>
-                <span asp-validation-for="Islem_Turu" class="text-danger"></span>
+                <span asp-validation-for="IslemTuru" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Tutar" class="control-label"></label>
