@@ -4,6 +4,7 @@ using Cari.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cari.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231115150051_AddColumn")]
+    partial class AddColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,10 +61,10 @@ namespace Cari.Data.Migrations
                     b.Property<string>("Adres")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IlId")
+                    b.Property<int?>("Il")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IlceId")
+                    b.Property<int?>("Ilce")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Tarih")
