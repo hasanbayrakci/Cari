@@ -27,6 +27,7 @@ namespace Cari.Controllers
         public ActionResult Details(int id)
         {
             var result = _db.Customer.Find(id);
+            ViewBag.Bakiye = GetCariDurum(id);
             return View(result);
         }
 
@@ -104,6 +105,14 @@ namespace Cari.Controllers
             {
                 return View();
             }
+        }
+
+        public decimal GetCariDurum(int id)
+        {
+            var giris = _db.CariHareket.Where(x => x.CustomerId == id && x.IslemTuru == 1).Sum(x => x.Tutar);
+            var cikis = _db.CariHareket.Where(x => x.CustomerId == id && x.IslemTuru == 2).Sum(x => x.Tutar);
+
+            return giris-cikis;
         }
     }
 }
