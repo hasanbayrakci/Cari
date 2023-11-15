@@ -6,7 +6,7 @@
 <div class="text-end">
     <a class="btn btn-primary btn-sm" role="button" asp-action="Create">Yeni Kayıt</a>
 </div>
-<table class="table table-bordered">
+<table id="dataTable" class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -52,3 +52,30 @@
         }
     </tbody>
 </table>
+
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+}
+@section Scripts{
+    <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 4,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+}
