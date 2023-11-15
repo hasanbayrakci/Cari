@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Cari.Models.CariHareket>
-
+﻿
 @{
     ViewData["Title"] = "Cari Hareket";
 }
@@ -11,16 +10,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
+                Firma
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IslemTuru)
+                İşlem Türü
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tutar)
+                Tutar
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tarih)
+                Tarih
             </th>
             <th></th>
         </tr>
@@ -32,16 +31,16 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CustomerId)
+                        @item.Unvan
                     </td>
                     <td>
                         @ViewBag.IslemTuru[item.IslemTuru]
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Tutar)
+                        @item.Tutar
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Tarih)
+                        @item.Tarih
                     </td>
                     <td>
                         <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Detay</a>

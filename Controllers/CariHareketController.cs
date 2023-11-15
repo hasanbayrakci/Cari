@@ -1,8 +1,6 @@
 ﻿using Cari.Data;
 using Cari.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cari.Controllers
 {
@@ -20,10 +18,21 @@ namespace Cari.Controllers
         // GET: CariHareketController
         public ActionResult Index()
         {
-            IEnumerable<CariHareket> objCariHareket = _db.CariHareket;
+            var result = from CariHareket in _db.CariHareket
+                        join Customer in _db.Customer
+                            on CariHareket.CustomerId equals Customer.Id into grouping
+                        from Customer in grouping.DefaultIfEmpty()
+                        select new { 
+                            Id = CariHareket.Id,
+                            Unvan = Customer.Unvan,
+                            IslemTuru = CariHareket.IslemTuru,
+                            Tutar = CariHareket.Tutar,
+                            Tarih = CariHareket.Tarih
+                        };
+
             CariHareket cariHareket = new CariHareket();
             ViewBag.IslemTuru = cariHareket.IslemTuruArray;
-            return View(objCariHareket);
+            return View(result.ToList());
         }
 
         // GET: CariHareketController/Details/5
