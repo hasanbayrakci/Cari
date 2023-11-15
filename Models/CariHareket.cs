@@ -11,14 +11,14 @@ namespace Cari.Models
         [Display(Name = "Firma")]
         public int CustomerId { get; set; }
         [Display(Name = "İşlem Türü")]
-        public int IslemTuru { get; set; } //1:Giriş, 2:Çıkış
+        public int IslemTuru { get; set; } //1:Borç Fişi, 2:Alacak Fişi
         public decimal Tutar {  get; set; }
         public DateTime Tarih { get; set; } = DateTime.Now;
 
         public Dictionary<int, string> IslemTuruArray { get; } = new Dictionary<int, string>
         {
-            { 1, "Giriş" },
-            { 2, "Çıkış" }
+            { 1, "Borç" },
+            { 2, "Alacak" }
         };
 
     }
