@@ -22,20 +22,33 @@ namespace Cari.Controllers
         // GET: FaturaKalemleri
         public IActionResult Index()
         {
-            var result = _db.FaturaKalemleri;
+            var result = from FaturaKalemleri in _db.FaturaKalemleri
+                         join Birimler in _db.Birimler
+                             on FaturaKalemleri.Birimi equals Birimler.Id into grouping
+                         from Birimler in grouping.DefaultIfEmpty()
+                         select new
+                         {
+                             Id = FaturaKalemleri.Id,
+                             Tanim = FaturaKalemleri.Tanim,
+                             Ozelligi = FaturaKalemleri.Ozelligi,
+                             Birimi = Birimler.Tanim,
+                             Kdv = FaturaKalemleri.Kdv,
+                             Tarih = FaturaKalemleri.Tarih
+                         };
+
             return View(result.ToList());
         }
 
         // GET: FaturaKalemleri/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null || _db.FaturaKalemleri == null)
             {
                 return NotFound();
             }
 
-            var faturaKalemleri = await _db.FaturaKalemleri
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var faturaKalemleri = _db.FaturaKalemleri.Find(id);
+
             if (faturaKalemleri == null)
             {
                 return NotFound();
@@ -47,6 +60,7 @@ namespace Cari.Controllers
         // GET: FaturaKalemleri/Create
         public IActionResult Create()
         {
+            ViewBag.Birimler = _db.Birimler;
             return View();
         }
 
@@ -55,29 +69,33 @@ namespace Cari.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Tanim,Ozelligi,Birim,Kdv,Tarih")] FaturaKalemleri faturaKalemleri)
+        public IActionResult Create(FaturaKalemleri faturaKalemleri)
         {
             if (ModelState.IsValid)
             {
                 _db.Add(faturaKalemleri);
-                await _db.SaveChangesAsync();
+                _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(faturaKalemleri);
         }
 
         // GET: FaturaKalemleri/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null || _db.FaturaKalemleri == null)
             {
                 return NotFound();
             }
 
-            var faturaKalemleri = await _db.FaturaKalemleri.FindAsync(id);
+            var faturaKalemleri = _db.FaturaKalemleri.Find(id);
             if (faturaKalemleri == null)
             {
                 return NotFound();
+            }
+            else
+            {
+                ViewBag.Birimler = _db.Birimler;
             }
             return View(faturaKalemleri);
         }
@@ -87,7 +105,7 @@ namespace Cari.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Tanim,Ozelligi,Birim,Kdv,Tarih")] FaturaKalemleri faturaKalemleri)
+        public IActionResult Edit(int id, FaturaKalemleri faturaKalemleri)
         {
             if (id != faturaKalemleri.Id)
             {
@@ -99,7 +117,7 @@ namespace Cari.Controllers
                 try
                 {
                     _db.Update(faturaKalemleri);
-                    await _db.SaveChangesAsync();
+                    _db.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,15 +136,14 @@ namespace Cari.Controllers
         }
 
         // GET: FaturaKalemleri/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null || _db.FaturaKalemleri == null)
             {
                 return NotFound();
             }
 
-            var faturaKalemleri = await _db.FaturaKalemleri
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var faturaKalemleri = _db.FaturaKalemleri.Find(id);
             if (faturaKalemleri == null)
             {
                 return NotFound();
@@ -138,19 +155,19 @@ namespace Cari.Controllers
         // POST: FaturaKalemleri/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             if (_db.FaturaKalemleri == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.FaturaKalemleri'  is null.");
             }
-            var faturaKalemleri = await _db.FaturaKalemleri.FindAsync(id);
+            var faturaKalemleri = _db.FaturaKalemleri.Find(id);
             if (faturaKalemleri != null)
             {
                 _db.FaturaKalemleri.Remove(faturaKalemleri);
             }
             
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

@@ -3,18 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Cari.Models
 {
-    public class FaturaKalemleri
+    public class Birimler
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public required string Tanim { get; set; }
-        public string? Ozelligi { get; set; }
-        [Required]
-        public required int Birimi { get; set; }
-        [Required]
-        public required decimal Kdv { get; set; }
         public DateTime Tarih { get; set; } = DateTime.Now;
     }
 }
