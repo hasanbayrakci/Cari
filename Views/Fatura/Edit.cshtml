@@ -1,0 +1,44 @@
+﻿@model Cari.Models.Fatura
+
+@{
+    ViewData["Title"] = "Düzenle";
+}
+
+<div class="row">
+    <div class="col-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control">
+                    <option value="">Seçiniz</option>
+                    @foreach (var firma in ViewBag.Customers)
+                    {
+                        <option value="@firma.Id">@firma.Unvan</option>
+                    }
+                </select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SiraNo" class="control-label"></label>
+                <input asp-for="SiraNo" class="form-control" />
+                <span asp-validation-for="SiraNo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FaturaTarihi" class="control-label"></label>
+                <input asp-for="FaturaTarihi" class="form-control" />
+                <span asp-validation-for="FaturaTarihi" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Kaydet" class="btn btn-primary btn-sm" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
