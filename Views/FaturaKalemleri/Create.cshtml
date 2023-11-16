@@ -19,12 +19,18 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Birimi" class="control-label"></label>
-                <input asp-for="Birimi" class="form-control" />
+                <select asp-for="Birimi" class="form-control">
+                    <option value="">Seçiniz</option>
+                    @foreach (var birim in ViewBag.Birimler)
+                    {
+                        <option value="@birim.Id">@birim.Tanim</option>
+                    }
+                </select>
                 <span asp-validation-for="Birimi" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Kdv" class="control-label"></label>
-                <input asp-for="Kdv" class="form-control" />
+                <input asp-for="Kdv" class="form-control" type="number" step="any"/>
                 <span asp-validation-for="Kdv" class="text-danger"></span>
             </div>
             <input type="submit" value="Kaydet" class="btn btn-primary btn-sm" />
