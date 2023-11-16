@@ -1,0 +1,37 @@
+﻿@model Cari.Models.Fatura
+
+@{
+    ViewData["Title"] = "Fatura Detayı";
+}
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.Customer.Unvan
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiraNo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiraNo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FaturaTarihi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FaturaTarihi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
+</div>

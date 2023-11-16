@@ -16,5 +16,6 @@ namespace Cari.Data
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Cari.Models.CariHareket> CariHareket { get; set; } = default!;
+        public DbSet<Cari.Models.Fatura> Fatura { get; set; } = default!;
     }
 }

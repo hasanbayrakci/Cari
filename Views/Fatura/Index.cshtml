@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-end">
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Create">Yeni Kayıt</a>
+</div>
+<table id="dataTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Unvan
+            </th>
+            <th>
+                Sıra No
+            </th>
+            <th>
+                Fatura Tarihi
+            </th>
+            <th>
+                Tarih
+            </th>
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Unvan
+            </td>
+            <td>
+                @item.SiraNo
+            </td>
+            <td>
+                @item.FaturaTarihi
+            </td>
+            <td>
+                @item.Tarih
+            </td>
+            <td>
+                <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                <a class="btn btn-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+}
+@section Scripts{
+    <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 4,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+}
