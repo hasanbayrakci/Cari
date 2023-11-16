@@ -1,0 +1,43 @@
+﻿@model Cari.Models.FaturaKalemleri
+
+@{
+    ViewData["Title"] = "Düzenle";
+}
+
+<div class="row">
+    <div class="col-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label asp-for="Tanim" class="control-label"></label>
+                <input asp-for="Tanim" class="form-control" />
+                <span asp-validation-for="Tanim" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Ozelligi" class="control-label"></label>
+                <input asp-for="Ozelligi" class="form-control" />
+                <span asp-validation-for="Ozelligi" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Birimi" class="control-label"></label>
+                <input asp-for="Birimi" class="form-control" />
+                <span asp-validation-for="Birimi" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Kdv" class="control-label"></label>
+                <input asp-for="Kdv" class="form-control" />
+                <span asp-validation-for="Kdv" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Kaydet" class="btn btn-primary btn-sm" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
