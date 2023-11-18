@@ -19,5 +19,6 @@ namespace Cari.Data
         public DbSet<Cari.Models.Fatura> Fatura { get; set; } = default!;
         public DbSet<Cari.Models.FaturaKalemleri> FaturaKalemleri { get; set; } = default!;
         public DbSet<Cari.Models.Birimler> Birimler { get; set; } = default!;
+        public DbSet<Cari.Models.FaturaDetay> FaturaDetay { get; set; } = default!;
     }
 }
