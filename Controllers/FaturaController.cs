@@ -57,6 +57,8 @@ namespace Cari.Controllers
             else
             {
                 ViewBag.Customer = _db.Customer.Find(fatura.CustomerId);
+                var FaturaDetay = _db.FaturaDetay.Where(x => x.FaturaId == id);
+                ViewBag.FaturaDetay = FaturaDetay;
             }
 
             return View(fatura);
@@ -180,6 +182,27 @@ namespace Cari.Controllers
         private bool FaturaExists(int id)
         {
           return (_db.Fatura?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public IActionResult CreateKalem(int id)
+        {
+            ViewBag.FaturaKalemleri = _db.FaturaKalemleri;
+            ViewBag.Birimler = _db.Birimler;
+            ViewBag.Id = id;
+            return View();
+        }
+
+        [HttpPost("Fatura/CreateKalem/{FaturaId}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateKalem(int FaturaId, FaturaDetay faturaDetay)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(faturaDetay);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Details), new {id = FaturaId});
+            }
+            return View();
         }
     }
 }

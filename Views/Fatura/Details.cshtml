@@ -3,35 +3,65 @@
 @{
     ViewData["Title"] = "Fatura Detayı";
 }
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </dt>
-        <dd class = "col-sm-10">
-            @ViewBag.Customer.Unvan
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SiraNo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SiraNo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FaturaTarihi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FaturaTarihi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarih)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tarih)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a>
-    <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
+<div class="row">
+    <div class="col-6">
+        <table class="table table-bordered">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CustomerId)</th>
+                <td>@ViewBag.Customer.Unvan</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SiraNo)</th>
+                <td>@Html.DisplayFor(model => model.SiraNo)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FaturaTarihi)</th>
+                <td>@Html.DisplayFor(model => model.FaturaTarihi)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Tarih)</th>
+                <td>@Html.DisplayFor(model => model.Tarih)</td>
+            </tr>
+        </table>
+        <div>
+            <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a>
+            <a class="btn btn-primary btn-sm" role="button" asp-action="Index">Geri</a>
+        </div>
+    </div>
+    <div class="col-6">
+        <h3>Fatura Kalemleri</h3>
+        <div>
+            <a class="btn btn-primary btn-sm" role="button" asp-action="CreateKalem" asp-route-id="@Model?.Id">Ekle</a>
+        </div>
+        @if (ViewBag.FaturaDetay != null)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Kalem Adı</th>
+                        <th>Özelliği</th>
+                        <th>Birimi</th>
+                        <th>KDV</th>
+                        <th>Miktar</th>
+                        <th>Birim Fiyat</th>
+                        <th>Tutar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in ViewBag.FaturaDetay)
+                {
+                    <tr>
+                        <td>@item.FaturaKalemleriId</td>
+                        <td>@item.Ozelligi</td>
+                        <td>@item.BirimlerId</td>
+                        <td>@item.Kdv</td>
+                        <td>@item.Miktar</td>
+                        <td>@item.BirimFiyat</td>
+                        <td>@item.Tutar</td>
+                    </tr>
+                }
+               </tbody>
+            </table>
+        }
+    </div>
 </div>
