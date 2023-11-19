@@ -45,19 +45,26 @@
                         <th>Miktar</th>
                         <th>Birim Fiyat</th>
                         <th>Tutar</th>
+                        <th>İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach (var item in ViewBag.FaturaDetay)
                 {
                     <tr>
-                        <td>@item.FaturaKalemleriId</td>
+                        <td>@item.Kalem</td>
                         <td>@item.Ozelligi</td>
-                        <td>@item.BirimlerId</td>
+                        <td>@item.Birimi</td>
                         <td>@item.Kdv</td>
                         <td>@item.Miktar</td>
                         <td>@item.BirimFiyat</td>
                         <td>@item.Tutar</td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" role="button" asp-action="EditKalem" asp-route-id="@item.Id">Düzenle</a>
+                                <form asp-action="DeleteKalem" asp-route-id="@item.Id">
+                                    <input type="submit" value="Sil" class="btn btn-danger btn-sm" />
+                                </form>
+                        </td>
                     </tr>
                 }
                </tbody>

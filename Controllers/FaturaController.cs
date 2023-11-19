@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cari.Data;
 using Cari.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Cari.Controllers
 {
@@ -57,8 +58,25 @@ namespace Cari.Controllers
             else
             {
                 ViewBag.Customer = _db.Customer.Find(fatura.CustomerId);
-                var FaturaDetay = _db.FaturaDetay.Where(x => x.FaturaId == id);
-                ViewBag.FaturaDetay = FaturaDetay;
+
+                var FaturaDetay = from FD in _db.FaturaDetay
+                                  join FK in _db.FaturaKalemleri
+                                    on FD.FaturaKalemleriId equals FK.Id
+                                  join B in _db.Birimler
+                                    on FK.Birimi equals B.Id
+                                  where FD.FaturaId == id
+                                  select new {
+                                      Id = FD.Id,
+                                      Kalem = FK.Tanim,
+                                      Ozelligi = FD.Ozelligi,
+                                      Birimi = B.Tanim,
+                                      Kdv = FD.Kdv,
+                                      Miktar = FD.Miktar,
+                                      BirimFiyat = FD.BirimFiyat,
+                                      Tutar = FD.Tutar
+                                  };
+
+              ViewBag.FaturaDetay = FaturaDetay;
             }
 
             return View(fatura);
@@ -204,5 +222,68 @@ namespace Cari.Controllers
             }
             return View();
         }
+
+        public IActionResult EditKalem(int? id)
+        {
+            if (id == null || _db.FaturaDetay == null)
+            {
+                return NotFound();
+            }
+            var FaturaDetay = _db.FaturaDetay.Find(id);
+            if (FaturaDetay == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                ViewBag.FaturaKalemleri = _db.FaturaKalemleri;
+                ViewBag.Birimler = _db.Birimler;
+            }
+            return View(FaturaDetay);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditKalem(int id, FaturaDetay faturaDetay)
+        {
+            if (id != faturaDetay.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var UpdateFd = _db.FaturaDetay.Find(id);
+                UpdateFd.FaturaKalemleriId = faturaDetay.FaturaKalemleriId;
+                UpdateFd.Ozelligi = faturaDetay.Ozelligi;
+                UpdateFd.BirimlerId = faturaDetay.BirimlerId;
+                UpdateFd.Kdv = faturaDetay.Kdv;
+                UpdateFd.Miktar = faturaDetay.Miktar;
+                UpdateFd.BirimFiyat = faturaDetay.BirimFiyat;
+                UpdateFd.Tutar = faturaDetay.Tutar;
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Details), new { id = UpdateFd.FaturaId });
+            }
+            return View(faturaDetay);
+        }
+
+        [HttpPost, ActionName("DeleteKalem")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteKalem(int id)
+        {
+            if (_db.FaturaDetay == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Fatura'  is null.");
+            }
+            var faturaDetay = _db.FaturaDetay.Find(id);
+            if (faturaDetay != null)
+            {
+                _db.FaturaDetay.Remove(faturaDetay);
+            }
+
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Details), new { id = faturaDetay.FaturaId });
+        }
+
     }
 }
