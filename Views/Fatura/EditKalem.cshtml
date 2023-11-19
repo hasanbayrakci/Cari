@@ -1,12 +1,13 @@
 ﻿@model Cari.Models.FaturaDetay
 
 @{
-    ViewData["Title"] = "Yeni Kayıt";
+    ViewData["Title"] = "Düzenle";
 }
 <div class="row">
     <div class="col-4">
-        <form asp-action="CreateKalem">
+        <form asp-action="EditKalem">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="mb-3">
                 <label asp-for="FaturaKalemleriId" class="control-label"></label>
                 <select asp-for="FaturaKalemleriId" class="form-control">
@@ -36,7 +37,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Kdv" class="control-label"></label>
-                <input asp-for="Kdv" class="form-control" type="number" step="any"/>
+                <input asp-for="Kdv" class="form-control" type="number" step="any" />
                 <span asp-validation-for="Kdv" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -60,7 +61,7 @@
 </div>
 
 <div>
-    <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@ViewBag.Id">Geri</a>
+    <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@Model.FaturaId">Geri</a>
 </div>
 
 @section Scripts {
